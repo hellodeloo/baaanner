@@ -1,7 +1,8 @@
 Baaanner
 ====================
 
-**Baaanner** est un starterkit qui aide à l'intégration de bannière publicitaire en HTML5.
+**Baaanner** est un starter-kit qui aide à l'intégration de bannière publicitaire en HTML5.
+
 Il utilise **[Gulp 4](http://gulpjs.com/)**, **[Babel](https://babeljs.io/)**, **ES6** et **[Sass](http://sass-lang.com/)**.
 
 

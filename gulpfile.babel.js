@@ -62,7 +62,8 @@ export function styles() {
     }))
     .pipe(cleanCSS())
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(paths.appDir));
+    .pipe(gulp.dest(paths.appDir))
+    .pipe(gulp.dest(paths.devDir));
 }
 
 
@@ -127,12 +128,14 @@ function compress() {
 }
 
 
-// BrowserSync Task
+// BrowserSync Reload Task
 function reload(done) {
   server.reload();
   done();
 }
 
+
+// BrowserSync Serve Task
 function serve(done) {
   server.init({
     server: {
@@ -145,7 +148,14 @@ function serve(done) {
 }
 
 
-const watch = () => gulp.watch(paths.devDir, gulp.series(html, styles, scripts, images, reload));
+// Watch Task
+function watch() {
+  gulp.watch(paths.devHtml, gulp.series(html, reload));
+  gulp.watch(paths.devScripts, gulp.series(scripts, reload));
+  gulp.watch(paths.devStyles, gulp.series(styles, reload));
+  gulp.watch(paths.devImages, gulp.series(images, reload));
+}
+
 
 const dev = gulp.series(clear, html, styles, scripts, images, serve, watch);
 gulp.task('serve', dev);
