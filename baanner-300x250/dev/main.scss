@@ -1,0 +1,202 @@
+@charset "UTF-8";
+
+// Vars
+$ba-width: 300px;
+$ba-height: 250px;
+
+$primary-color: #df0500;
+$secondary-color: #f79600;
+$tertiary-color: #4078bb;
+
+$light-color: #ffffff;
+$dark-color: #000000;
+
+
+// Base styles
+:focus {
+	outline:none;
+}
+::-moz-focus-inner {
+	border:0;
+}
+svg:not(:root) {
+	overflow: visible;
+}
+html {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-touch-callout: none;
+	text-rendering: optimizeLegibility;
+}
+body,
+body * {
+	vertical-align: baseline;
+	border: 0;
+	outline: 0;
+	padding: 0;
+	margin: 0;
+	line-height: 1;
+	user-select: none;
+	box-sizing:border-box;
+}
+img {
+	display: block;
+}
+#ba-container {
+	display: block;
+	position: relative;
+	width: $ba-width;
+	height: $ba-height;
+	border: 1px solid $dark-color;
+	overflow: hidden;
+	background-color: $primary-color;
+}
+.ba-content {
+	display: block;
+	position: absolute;
+	z-index: 1;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	cursor: pointer;
+	transition: opacity .9s;
+}
+
+
+
+
+// Custom styles
+#ba-content {
+	// Scene 01
+	&__scene-01 {
+		@extend .ba-content;
+		&.is-current {
+			opacity: 1;
+		}
+		// Step 01
+		&__step-01 {
+			&-banner {
+				display: block;
+				position: absolute;
+				z-index: 1;
+				top: 0px;
+				left: 0px;
+			}
+			&-logo {
+				display: block;
+				position: absolute;
+				z-index: 1;
+				bottom: 10px;
+				right: 10px;
+				img {
+					width: 30px;
+				}
+			}
+			&-paulo {
+				display: block;
+				position: absolute;
+				z-index: 2;
+				top: 10px;
+				left: 5px;
+				opacity: 0;
+				transition: opacity .6s ease-in .3s;
+				.is-playing & {
+					opacity: 1;
+				}
+			}
+			&-txt {
+				display: block;
+				position: absolute;
+				z-index: 2;
+				top: 70px;
+				left: 87px;
+				opacity: 0;
+				transition: opacity .6s ease-in .3s;
+				.is-playing & {
+					opacity: 1;
+				}
+			}
+		}
+		// Step 02
+		&__step-02 {
+			&-txt {
+				display: block;
+				position: absolute;
+				z-index: 2;
+				top: 50%;
+				left: 50%;
+				opacity: 0;
+				transform: translate(-50%, -50%);
+				transition: opacity .6s ease-in .3s;
+				.is-playing & {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	// Scene 02
+	&__scene-02 {
+		@extend .ba-content;
+		background-color: $light-color;
+		&.is-current {
+			opacity: 1;
+		}
+		// Step 01
+		&__step-01 {
+			&-logo {
+				display: block;
+				position: absolute;
+				z-index: 1;
+				bottom: 10px;
+				right: 10px;
+				transition: all .6s ease-out;
+				img {
+					transition: with .6s;
+					width: 30px;
+				}
+				.is-playing & {
+					bottom: 15px;
+					right: 15px;
+					img {
+						width: 50px;
+					}
+				}
+			}
+			&-txt01 {
+				display: block;
+				position: absolute;
+				z-index: 2;
+				top: 30%;
+				left: 50%;
+				transform: translate(-50%, 0);
+				opacity: 0;
+				transition: opacity .6s ease-in;
+				.is-playing & {
+					opacity: 1;
+				}
+			}
+			&-txt02 {
+				display: block;
+				position: absolute;
+				z-index: 2;
+				top: 40%;
+				left: 50%;
+				transform: translate(-50%, -10%) scale(1);
+				opacity: 0;
+				transition: opacity .6s ease-in;
+				.is-playing & {
+					opacity: 1;
+					animation: txt02Anim .9s ease .9s 1;
+				}
+			}
+		}
+
+	}
+}
+
+@keyframes txt02Anim {
+  0% { transform: translate(-50%, -10%) scale(1); }
+  30%, 60% { transform: translate(-50%, -10%) scale(1.2); }
+}
