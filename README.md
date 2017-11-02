@@ -27,10 +27,10 @@ npm install
 **Développez** dans le dossier "dev" et lancer la commande `gulp serve` qui se chargera de :
 
 - Lancer le BrowserSync
-- Compilera le style.scss
-- Minifiera le script.js
-- Optmisera les images
-- Placera le tout dans le répertoire "app"
+- Compiler le scss
+- Minifier le js
+- Optmiser les images
+- Placer le tout dans le répertoire "app"
 
 
 **Créez** votre livrable zippé avec `gulp deliver`
