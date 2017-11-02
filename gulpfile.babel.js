@@ -17,7 +17,7 @@ import zip from 'gulp-zip';
 
 const server = browserSync.create();
 
-const folder = 'baanner-300x250';
+const folder = 'baaanner-300x250';
 
 const paths = {
   devDir: folder + '/dev/',

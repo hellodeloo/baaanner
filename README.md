@@ -14,7 +14,7 @@ git clone git@github.com:hellodeloo/baanner.git
 ```
 
 ```
-cd baanner
+cd baaanner
 npm install
 ```
 
@@ -22,7 +22,7 @@ npm install
 
 ## Utilisation
 
-**Renommez** le répertoire "banner-300x250" et adaptez les variables présentes dans le `gulpfile.babel.js`
+**Renommez** le répertoire "baaanner-300x250" et adaptez les variables présentes dans le `gulpfile.babel.js`
 
 **Développez** dans le dossier "dev" et lancer la commande `gulp serve` qui se chargera de :
 
