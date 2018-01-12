@@ -2,7 +2,6 @@ import gulp from 'gulp';
 import babel from 'gulp-babel';
 import concat from 'gulp-concat';
 import uglify from 'gulp-uglify';
-import rename from 'gulp-rename';
 import del from 'del';
 import browserSync from 'browser-sync';
 import plumber from 'gulp-plumber';
@@ -20,19 +19,20 @@ const server = browserSync.create();
 const folder = 'baaanner-300x250';
 
 const paths = {
-  devDir: folder + '/dev/',
-  appDir: folder + '/app/',
-  devHtml: folder + '/dev/index.html',
-  appHtml: folder + '/app/index.html',
-  devImages: folder + '/dev/*.{jpg,jpeg,png,svg}',
-  appImages: folder + '/app/*.{jpg,jpeg,png,svg}',
-  devScripts: folder + '/dev/main.js',
-  appScripts: folder + '/app/main.js',
-  devStyles: folder + '/dev/main.scss',
-  appStyles: folder + '/app/main.css'
+  srcDir: folder + '/src/',
+  distDir: folder + '/dist/',
+  buildDir: folder + '/build/',
+  srcHtml: folder + '/src/index.html',
+  distHtml: folder + '/dist/index.html',
+  srcImages: folder + '/src/*.{jpg,jpeg,png,svg}',
+  distImages: folder + '/dist/*.{jpg,jpeg,png,svg}',
+  srcScripts: folder + '/src/main.js',
+  distScripts: folder + '/dist/main.js',
+  srcStyles: folder + '/src/main.scss',
+  distStyles: folder + '/dist/main.css'
 };
 
-const compressFiles = [paths.appHtml, paths.appScripts, paths.appStyles, paths.appImages];
+const compressFiles = [paths.distHtml, paths.distScripts, paths.distStyles, paths.distImages];
 
 const onError = (err) => {
   notify.onError({
@@ -43,14 +43,12 @@ const onError = (err) => {
   this.emit('end');
 };
 
-
 // Delete App folder Task
-export const clear = () => del([paths.appDir]);
-
+export const clear = () => del([paths.distDir]);
 
 // Styles Task
 export function styles() {
-  return gulp.src(paths.devStyles)
+  return gulp.src(paths.srcStyles)
     .pipe(plumber({
       errorHandler: onError
     }))
@@ -62,29 +60,27 @@ export function styles() {
     }))
     .pipe(cleanCSS())
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(paths.appDir))
-    .pipe(gulp.dest(paths.devDir));
+    .pipe(gulp.dest(paths.distDir))
+    .pipe(gulp.dest(paths.srcDir));
 }
-
 
 // Javascript Task
 export function scripts() {
-  return gulp.src(paths.devScripts, {
-      sourcemaps: true
-    })
+  return gulp.src(paths.srcScripts, {
+    sourcemaps: true
+  })
     .pipe(plumber({
       errorHandler: onError
     }))
     .pipe(babel())
     .pipe(uglify())
     .pipe(concat('main.js'))
-    .pipe(gulp.dest(paths.appDir));
+    .pipe(gulp.dest(paths.distDir));
 }
-
 
 // Minify HTML Task
 export function html() {
-  return gulp.src(paths.devHtml)
+  return gulp.src(paths.srcHtml)
     .pipe(plumber({
       errorHandler: onError
     }))
@@ -93,15 +89,14 @@ export function html() {
       spare: true,
       quotes: true
     }))
-    .pipe(gulp.dest(paths.appDir));
+    .pipe(gulp.dest(paths.distDir));
 }
-
 
 // Compress Images Task
 export function images() {
-  return gulp.src(paths.devImages, {
-      since: gulp.lastRun(images)
-    })
+  return gulp.src(paths.srcImages, {
+    since: gulp.lastRun(images)
+  })
     .pipe(plumber({
       errorHandler: onError
     }))
@@ -113,9 +108,8 @@ export function images() {
         removeViewBox: false
       }]
     }))
-    .pipe(gulp.dest(paths.appDir));
+    .pipe(gulp.dest(paths.distDir));
 }
-
 
 // Compress in zip Task
 function compress() {
@@ -124,9 +118,8 @@ function compress() {
       errorHandler: onError
     }))
     .pipe(zip(folder + '.zip'))
-    .pipe(gulp.dest(folder + '/'));
+    .pipe(gulp.dest(paths.buildDir));
 }
-
 
 // BrowserSync Reload Task
 function reload(done) {
@@ -134,12 +127,11 @@ function reload(done) {
   done();
 }
 
-
 // BrowserSync Serve Task
 function serve(done) {
   server.init({
     server: {
-      baseDir: paths.appDir
+      baseDir: paths.distDir
     },
     open: false,
     notify: false
@@ -147,20 +139,18 @@ function serve(done) {
   done();
 }
 
-
 // Watch Task
 function watch() {
-  gulp.watch(paths.devHtml, gulp.series(html, reload));
-  gulp.watch(paths.devScripts, gulp.series(scripts, reload));
-  gulp.watch(paths.devStyles, gulp.series(styles, reload));
-  gulp.watch(paths.devImages, gulp.series(images, reload));
+  gulp.watch(paths.srcHtml, gulp.series(html, reload));
+  gulp.watch(paths.srcScripts, gulp.series(scripts, reload));
+  gulp.watch(paths.srcStyles, gulp.series(styles, reload));
+  gulp.watch(paths.srcImages, gulp.series(images, reload));
 }
 
-
 const dev = gulp.series(clear, html, styles, scripts, images, serve, watch);
-gulp.task('serve', dev);
+gulp.task('dev', dev);
 
-const deliver = gulp.series(html, styles, scripts, images, compress);
-gulp.task('deliver', deliver);
+const build = gulp.series(html, styles, scripts, images, compress);
+gulp.task('build', build);
 
 export default dev;

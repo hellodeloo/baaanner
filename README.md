@@ -24,7 +24,7 @@ npm install
 
 **Renommez** le répertoire "baaanner-300x250" et adaptez les variables présentes dans le `gulpfile.babel.js`
 
-**Développez** dans le dossier "dev" et lancer la commande `gulp serve` qui se chargera de :
+**Développez** dans le dossier "src" et lancer la commande `gulp dev` qui se chargera de :
 
 - Lancer le BrowserSync
 - Compiler le scss
@@ -33,4 +33,4 @@ npm install
 - Placer le tout dans le répertoire "app"
 
 
-**Créez** votre livrable zippé avec `gulp deliver`
+**Créez** votre livrable zippé avec `gulp build`
