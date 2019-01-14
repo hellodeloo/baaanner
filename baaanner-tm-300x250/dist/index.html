@@ -1,0 +1,49 @@
+<!DOCTYPE html><html><head><title>&nbsp;</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="x-apple-disable-message-reformatting"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><link type="text/css" rel="stylesheet" href="main.css"></head><body><div id="container" onclick=""><div id="img01"></div><div id="img02"></div><div id="img03"></div><div id="jaune"></div><div id="image"><div id="img03b"></div></div><div id="timbre"></div><div id="txt1"></div><div id="txt2"></div><div id="outro"></div><div id="cta"></div><div id="logo"></div><div id="contour"></div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script><script>
+			// Global Const
+			let trs = 0.6;
+			let loop = 0;
+			let timeline = new TimelineLite(/*{onComplete:playAgain}*/);
+
+			function init() {
+				timeline.to(container, 0, { autoAlpha: 1 });
+
+				// timeline.from(img01, 0.1, {autoAlpha: 0});
+				timeline.from(img02, 0.1, { autoAlpha: 0 }, "+=0.1");
+				timeline.from(img03, 0.1, { autoAlpha: 0 }, "+=0.1");
+
+				timeline.to(img02, 0.1, { autoAlpha: 0 }, "+=0.1");
+				timeline.to(img03, 0.1, { autoAlpha: 0 }, "-=0.1");
+				timeline.to(img02, 0.1, { autoAlpha: 1 }, "+=0.1");
+				timeline.to(img03, 0.1, { autoAlpha: 1 }, "+=0.1");
+				timeline.to(img02, 0.1, { autoAlpha: 0 }, "+=0.1");
+				timeline.to(img03, 0.1, { autoAlpha: 0 }, "-=0.1");
+				timeline.to(img02, 0.1, { autoAlpha: 1 }, "+=0.1");
+				timeline.to(img03, 0.1, { autoAlpha: 1 }, "+=0.1");
+
+				timeline.from(timbre, 1, { ease: Power3.easeOut, autoAlpha: 0, y: 30 });
+				timeline.from(img03b, 0.5, { autoAlpha: 0 });
+				timeline.to(image, 0.5, { scale: 0.55, x: "70px", y: "50px", rotation: "15deg" });
+				timeline.to(img03b, 0.5, { ease: Power3.easeOut, scale: 1.5, x: "20px", y: "70px" }, "-=0.5");
+				timeline.to(timbre, 0.5, { scale: 0.55, x: "70px", y: "50px", rotation: "15deg" }, "-=0.5");
+				timeline.from(jaune, 0.5, { autoAlpha: 0 }, "-=0.5");
+				timeline.from(txt1, 0.7, { autoAlpha: 0 }, "-=0.25");
+
+				timeline.to([timbre, image, txt1], 0.5, { ease: Power2.easeOut, left: "-100%" }, "+=2.5");
+				timeline.from(txt2, 0.5, { ease: Back.easeOut.config(1), left: "100%" }, "-=0.5");
+
+				timeline.to(txt2, 0.5, { ease: Power2.easeOut, left: "-100%" }, "+=2.5");
+				timeline.from(outro, 1, { ease: Back.easeOut.config(1), left: "100%", autoAlpha: 0 }, "-=0.5");
+				timeline.from(cta, 0.7, { ease: Power4.easeOut, top: 375 });
+				timeline.from(logo, 0.7, { ease: Power4.easeOut, autoAlpha: 0 }, "-=0.5");
+			}
+
+			window.onload = init;
+
+			function playAgain() {
+				loop++;
+				if (loop < 4) {
+					timeline.restart();
+				};
+			}
+
+		</script></body></html>

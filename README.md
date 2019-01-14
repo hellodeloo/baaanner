@@ -15,7 +15,7 @@ git clone git@github.com:hellodeloo/baanner.git
 
 ```
 cd baaanner
-npm install
+yarn install
 ```
 
 
@@ -24,13 +24,13 @@ npm install
 
 **Renommez** le répertoire "baaanner-300x250" et adaptez les variables présentes dans le `gulpfile.babel.js`
 
-**Développez** dans le dossier "src" et lancer la commande `gulp dev` qui se chargera de :
+**Développez** dans le dossier "src" et lancer la commande `yarn dev` qui se chargera de :
 
 - Lancer le BrowserSync
 - Compiler le scss
 - Minifier le js
 - Optmiser les images
-- Placer le tout dans le répertoire "app"
+- Placer le tout dans le répertoire "dist"
 
 
-**Créez** votre livrable zippé avec `gulp build`
+**Créez** votre livrable zippé avec `yarn build`

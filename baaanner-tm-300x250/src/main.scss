@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+// Vars
+$ba-width: 300px;
+$ba-height: 250px;
+
+$primary-color: #ffd100;
+$secondary-color: #888888;
+$tertiary-color: #4078bb;
+
+$light-color: #ffffff;
+$dark-color: #000000;
+
+
+// Base styles
+			body {
+				margin: 0;
+				padding: 0;
+			}
+
+			#container {
+				position: absolute;
+				width: $ba-width;
+				height: $ba-height;
+				overflow: hidden;
+				background-color: $primary-color;
+				cursor: pointer;
+				opacity: 0;
+				visibility: hidden;
+			}
+
+			#img01,
+			#img02,
+			#img03,
+			#jaune,
+			#txt1,
+			#txt2,
+			#outro,
+			#cta,
+			#logo {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+			}
+
+			#jaune {
+				background-color: $primary-color;
+			}
+
+			#img01 {
+				background-image: url("img01.jpg");
+			}
+
+			#img02 {
+				background-image: url("img02.jpg");
+			}
+
+			#img03 {
+				background-image: url("img03.jpg");
+			}
+
+			#txt1 {
+				background-image: url("txt1.png");
+			}
+
+			#txt2 {
+				background-image: url("txt2.png");
+			}
+
+			#outro {
+				background-image: url("outro.png");
+			}
+
+			#cta {
+				background-image: url("cta.png");
+			}
+
+			#logo {
+				background-image: url("logo.png");
+			}
+
+			#timbre {
+				position: absolute;
+				background-image: url("timbre.png");
+				width: 153px;
+				height: 196px;
+				top: 29px;
+				left: 78px;
+			}
+
+			#image {
+				position: absolute;
+				width: 128px;
+				height: 173px;
+				top: 42px;
+				left: 91px;
+				overflow: hidden;
+			}
+
+			#img03b {
+				position: absolute;
+				width: 300px;
+				height: 250px;
+				left: -91px;
+				top: -42px;
+				background-image: url("img03.jpg");
+			}
+
+
+			#contour {
+				position: absolute;
+				width: calc(100% - 2px);
+				height: calc(100% - 2px);
+				left: 0px;
+				top: 0px;
+				border: 1px solid $secondary-color
+			}
